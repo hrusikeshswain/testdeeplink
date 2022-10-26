@@ -21,3 +21,13 @@ jobs:
       - run:
           name: Run tests
           command: npm run test
+      - sonarcloud/scan
+
+  orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.3
+
+  workflows:
+  main:
+    jobs:
+      - build:
+          context: SonarCloud        
