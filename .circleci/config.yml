@@ -1,23 +1,12 @@
 version: 2.1
 jobs:
-  sonar:
-    working_directory: ~/repo
-    docker:
-      - image: circleci/node:10.16.3
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/repo
-
-      - sonarcloud/scan:
-          sonar_token_variable_name: SONAR_TOKEN
-
   build:
     working_directory: ~/repo
     docker:
       - image: circleci/node:10.16.3
     steps:
       - checkout
+      - sonarcloud/scan
       - run:
           name: Update NPM
           command: "sudo npm install -g npm@5"
@@ -35,12 +24,10 @@ jobs:
           command: npm run test
 
   orbs:
-  sonarcloud: sonarsource/sonarcloud@1.1.1
+  sonarcloud: sonarsource/sonarcloud@1.1.0
 
 workflows:
-  ci:
+  main:
     jobs:
-      - sonar
       - build:
-          requires:
-            - sonar          
+          context: sonarcloud       
