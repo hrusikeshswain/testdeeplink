@@ -1,5 +1,17 @@
 version: 2.1
 jobs:
+  sonar:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:10.16.3
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+
+      - sonarcloud/scan:
+          sonar_token_variable_name: SONAR_TOKEN
+
   build:
     working_directory: ~/repo
     docker:
@@ -21,13 +33,14 @@ jobs:
       - run:
           name: Run tests
           command: npm run test
-      - sonarcloud/scan
 
   orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.3
 
-  workflows:
-  main:
+workflows:
+  ci:
     jobs:
+      - sonar
       - build:
-          context: SonarCloud        
+          requires:
+            - sonar          
