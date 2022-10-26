@@ -1,4 +1,7 @@
 version: 2.1
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.1.0
+
 jobs:
   build:
     working_directory: ~/repo
@@ -22,9 +25,6 @@ jobs:
       - run:
           name: Run tests
           command: npm run test
-
-  orbs:
-  sonarcloud: sonarsource/sonarcloud@1.1.0
 
 workflows:
   main:
