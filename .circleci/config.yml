@@ -9,7 +9,6 @@ jobs:
       - image: circleci/node
     steps:
       - checkout
-      - sonarcloud/scan
       - run:
           name: Update NPM
           command: "sudo npm install -g npm@5"
@@ -25,6 +24,7 @@ jobs:
       - run:
           name: Run tests
           command: npm run test
+      - sonarcloud/scan    
 
 workflows:
   main:
