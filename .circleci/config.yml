@@ -35,7 +35,7 @@ jobs:
           command: npm run test
 
   orbs:
-  sonarcloud: sonarsource/sonarcloud@1.0.3
+  sonarcloud: sonarsource/sonarcloud@1.1.1
 
 workflows:
   ci:
