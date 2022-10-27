@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "Sonar cloud connection",
+        "projectKey": "hrusikeshswain_testdeeplink"
+    }
+}
